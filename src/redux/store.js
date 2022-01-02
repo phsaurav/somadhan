@@ -4,11 +4,7 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 
-import counterReducer from "./slices/counter/counterSlice";
-
-const reducers = combineReducers({
-	counter: counterReducer,
-});
+const reducers = combineReducers({});
 
 const persistConfig = {
 	key: "root",
