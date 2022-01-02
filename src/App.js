@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import { Counter } from './redux/slice/counter/Counter';
+import { Counter } from './redux/slices/counter/Counter';
 import './App.css';
 
 function App() {
