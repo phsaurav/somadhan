@@ -4,54 +4,26 @@ import { Counter } from './redux/slices/counter/Counter';
 import './App.css';
 
 function App() {
+  const issue = 'hi';
+  const handleButon = () => {
+    fetch('http://localhost:5000/issue', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(issue),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          window.alert('Product added successfully');
+        }
+      });
+    console.log('clicked');
+  };
   return (
     <div className="App">
-      <h2 className="text-green-700 text-4xl  font-bold">hi</h2>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <button onClick={handleButon}>hi</button>
     </div>
   );
 }
