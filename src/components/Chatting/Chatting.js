@@ -4,7 +4,7 @@ import Chat from './Chat';
 import './Chatting.css';
 // import Chat from './Chatting';
 
-const socket = io.connect('http://localhost:3001');
+const socket = io.connect('http://localhost:3000');
 const Chatting = () => {
   const [username, setUsername] = useState('');
   const [room, setRoom] = useState('');
