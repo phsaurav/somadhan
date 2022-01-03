@@ -23,12 +23,14 @@ const useFirebase = () => {
 	const [token, setToken] = useState("");
 	const auth = getAuth();
 
+	//* Google Sign In handler
 	const signInUsingGoogle = () => {
 		setIsLoading(true);
 		const googleProvider = new GoogleAuthProvider();
 		return signInWithPopup(auth, googleProvider);
 	};
 
+	//* Logout handler
 	const logOut = () => {
 		setIsLoading(true);
 		signOut(auth)
@@ -38,16 +40,19 @@ const useFirebase = () => {
 			.finally(() => setIsLoading(false));
 	};
 
+	//* Email Password Login handler
 	const processLogin = (email, password) => {
 		setIsLoading(true);
 		return signInWithEmailAndPassword(auth, email, password);
 	};
 
+	//*Sign Up handler
 	const createNewUser = (email, password) => {
 		setIsLoading(true);
 		return createUserWithEmailAndPassword(auth, email, password);
 	};
 
+	//*Save New User to backend
 	const saveUser = (email, displayName, photoURL, method) => {
 		const user = { email, displayName, photoURL };
 		fetch("https://specssphere.herokuapp.com/users", {
@@ -59,6 +64,7 @@ const useFirebase = () => {
 		}).then();
 	};
 
+	//*Load User Information from backend
 	// useEffect(() => {
 	// 	fetch(`https://specssphere.herokuapp.com/users/${user?.email}`)
 	// 		.then((res) => res.json())
@@ -71,6 +77,7 @@ const useFirebase = () => {
 	// 		});
 	// }, [user?.email]);
 
+	//* Firebase state change monitor
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {

@@ -3,14 +3,44 @@ import logo from "../../assets/logo_title_square.png";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { BsGoogle } from "react-icons/bs";
+import useFirebase from "../../hooks/useFirebase";
 
 const Login = () => {
 	const { handleSubmit, register } = useForm();
 
-	const handleGoogleSignIn = () => {};
+	const { setUser, setError, setIsLoading, signInUsingGoogle, processLogin } = useFirebase();
+
+	//* Google Sign In Handler Method
+	const handleGoogleSignIn = () => {
+		signInUsingGoogle()
+			.then((res) => {
+				const user = res.user;
+				setUser(user);
+				// saveUser(user.email, user.displayName, user.photoURL, "PUT");
+				// history.push(redirect_uri);
+			})
+			.catch((error) => {
+				setError(error.message);
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
+	};
 
 	const onSubmit = (data) => {
-		console.log(data);
+		processLogin(data.email, data.password)
+			.then((res) => {
+				setUser(res.user);
+				setError("");
+				// history.push(redirect_uri);
+			})
+			.catch((error) => {
+				setError(error.message);
+			})
+			.finally(() => {
+				window.location.reload();
+				setIsLoading(false);
+			});
 	};
 	return (
 		<div>
