@@ -55,7 +55,7 @@ const useFirebase = () => {
 	//*Save New User to backend
 	const saveUser = (email, displayName, photoURL, isAdmin = "user", method) => {
 		const user = { email, displayName, photoURL, isAdmin };
-		fetch("https://specssphere.herokuapp.com/user", {
+		fetch("https://somadhan101.herokuapp.com/user", {
 			method: method,
 			headers: {
 				"content-type": "application/json",
@@ -66,7 +66,7 @@ const useFirebase = () => {
 
 	//*Load User Information from backend
 	// useEffect(() => {
-	// 	fetch(`https://specssphere.herokuapp.com/users/${user?.email}`)
+	// 	fetch(`https://somadhan101.herokuapp.com/users/${user?.email}`)
 	// 		.then((res) => res.json())
 	// 		.then((data) => {
 	// 			setAdmin(data.admin);
