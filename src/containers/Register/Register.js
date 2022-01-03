@@ -6,8 +6,6 @@ import { useForm } from "react-hook-form";
 const Register = () => {
 	const { handleSubmit, register } = useForm();
 
-	const handleGoogleSignIn = () => {};
-
 	const onSubmit = (data) => {
 		console.log(data);
 	};
