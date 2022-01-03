@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../../assets/logo_title_square.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,6 @@ const Login = () => {
 			.then((res) => {
 				const user = res.user;
 				setUser(user);
-				saveUser(user.email, user.displayName, user.photoURL, "PUT");
 				navigate(redirect_uri);
 			})
 			.catch((error) => {

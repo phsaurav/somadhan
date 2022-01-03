@@ -3,20 +3,20 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo_title_dark.png";
 import { Transition } from "@headlessui/react";
 import { BiUser } from "react-icons/bi";
-import "./DashHeader.css";
-import useAuth from "../../hooks/useAuth";
+import "./Navbar.css";
+import useFirebase from "../../hooks/useFirebase";
 
 const Navbar = () => {
 	const { user, logOut, admin } = useFirebase();
 	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<div className='md:min-h-screen md:w-96'>
-			<div className='bg-brand-1 md:min-h-screen md:w-80 xl:w-96 md:fixed z-50'>
+			<div className='bg-brand-2 md:min-h-screen md:w-80 xl:w-96 md:fixed z-50'>
 				<nav className='relative z-20'>
 					<div className='container mx-auto'>
 						<div className='text-black flex flex-col items-center'>
 							<NavLink to='/home'>
-								<img className='h-7 md:mt-32 md:my-10 my-5' src={logo} alt='logo' />
+								<img className='h-16 md:mt-32 md:my-10 my-5' src={logo} alt='logo' />
 							</NavLink>
 
 							<div className='flex items-end justify-center'>
@@ -39,7 +39,7 @@ const Navbar = () => {
 												</Link>
 												<div
 													onClick={logOut}
-													className='cursor-default font-semibold text-brand-1 px-2 py-2 transition duration-300 ease-in-out hover:bg-brand-1 hover:text-white bg-white mb-10 uppercase border-2 shadow-xl mt-5 border-white'
+													className='cursor-default font-semibold text-brand-1 px-2 py-2 transition duration-300 ease-in-out hover:bg-brand-1 hover:text-white bg-white mb-10 uppercase border-2 shadow-xl mt-5 border-white text-center'
 												>
 													Sign Out
 												</div>
@@ -61,7 +61,7 @@ const Navbar = () => {
 											</NavLink>
 										</div>
 									)}
-									<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base'>
+									<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base text-center'>
 										<NavLink
 											to='/home'
 											className='font-base  text-bluegray-300 transition duration-500 ease-in-out hover:font-semibold hover:text-white link-underline  px-3 lg:px-6 py-4 link link-underline border-b border-brand-6 text-sm'
@@ -87,7 +87,7 @@ const Navbar = () => {
 									</div>
 									{user.displayName && (
 										<div>
-											<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base'>
+											<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base text-center'>
 												<NavLink
 													to='/dashboard'
 													className='font-base text-bluegray-300 transition duration-500 ease-in-out hover:text-white link hover:font-semibold link-underline px-3 lg:px-6 py-4 border-b border-white text-sm'
@@ -102,7 +102,7 @@ const Navbar = () => {
 												</NavLink>
 											</div>
 											{!admin ? (
-												<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base'>
+												<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base text-center'>
 													<NavLink
 														to='/dashboard/myorders'
 														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'

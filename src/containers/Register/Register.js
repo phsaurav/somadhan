@@ -29,11 +29,7 @@ const Register = () => {
 		setError("");
 		createNewUser(data.email, data.password)
 			.then((res) => {
-				const email = data.email;
-				const newUser = { email, displayName: data.name };
-				const url = "https://i.ibb.co/VmSVPNR/female.png";
 				setUser(newUser);
-				saveUser(data.email, data.name, url, data.admin, "POST");
 				updateProfile(auth.currentUser, {
 					displayName: data.name,
 					photoURL: url,
@@ -51,6 +47,11 @@ const Register = () => {
 			.finally(() => {
 				setIsLoading(false);
 			});
+
+		const email = data.email;
+		const newUser = { email, displayName: data.name };
+		const url = "https://i.ibb.co/VmSVPNR/female.png";
+		saveUser(data.email, data.name, url, data.admin, "POST");
 	};
 	return (
 		<div className='w-full h-full fixed block top-0 left-0 bg-white  z-30 '>
