@@ -1,13 +1,56 @@
 import React from "react";
 import logo from "../../assets/logo_title_square.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import useFirebase from "../../hooks/useFirebase";
 
 const Register = () => {
 	const { handleSubmit, register } = useForm();
+	const { auth, error, saveUser, setUser, setError, setIsLoading, createNewUser, updateProfile } =
+		useFirebase();
+
+	const location = useLocation();
+	const redirect_uri = location.state?.from || "/home";
+	let navigate = useNavigate();
 
 	const onSubmit = (data) => {
-		console.log(data);
+		if (data?.password?.length <= 5) {
+			setError("Password Must be atleast 6 character long");
+			return;
+		}
+		if (!/^(?=.*[0-9])/.test(data.password)) {
+			setError("Password Must have one nubmer!");
+			return;
+		}
+		if (data.password !== data.password2) {
+			setError("Password Doesn't match!!");
+			return;
+		}
+		setError("");
+		createNewUser(data.email, data.password)
+			.then((res) => {
+				const email = data.email;
+				const newUser = { email, displayName: data.name };
+				const url = "https://i.ibb.co/VmSVPNR/female.png";
+				setUser(newUser);
+				saveUser(data.email, data.name, url, data.admin, "POST");
+				updateProfile(auth.currentUser, {
+					displayName: data.name,
+					photoURL: url,
+				})
+					.then(() => {})
+					.catch((err) => {});
+				setError("");
+				navigate(redirect_uri);
+				window.location.reload();
+				setUser(res.user);
+			})
+			.catch((error) => {
+				setError(error.message);
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
 	};
 	return (
 		<div className='w-full h-full fixed block top-0 left-0 bg-white  z-30 '>
@@ -49,13 +92,13 @@ const Register = () => {
 					/>
 					<select
 						className='text-sm w-80 bg-gray-100 flex flex-row justify-between h-12 pl-5 rounded-lg my-5 pr-5 text-center'
-						name='Gender'
-						{...register("gender")}
+						name='Admin'
+						{...register("admin")}
 					>
-						<option value='male' className='text-center'>
+						<option value='user' className='text-center'>
 							User Account
 						</option>
-						<option value='female' className='text-center'>
+						<option value='admin' className='text-center'>
 							Admin Account
 						</option>
 					</select>
@@ -68,7 +111,7 @@ const Register = () => {
 					</Link>
 				</form>
 				<hr className='border-0 w-80 bg-bluegray-300 text-gray-500 h-px'></hr>
-				<p className='text-center py-3 font-semibold text-brand-12 mb-96'>Error will be here!!</p>
+				<p className='text-center py-3 font-semibold text-brand-12 mb-96'>{error}</p>
 			</div>
 		</div>
 	);

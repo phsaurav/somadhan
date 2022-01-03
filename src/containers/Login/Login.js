@@ -1,14 +1,18 @@
 import React from "react";
 import logo from "../../assets/logo_title_square.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { BsGoogle } from "react-icons/bs";
 import useFirebase from "../../hooks/useFirebase";
 
 const Login = () => {
 	const { handleSubmit, register } = useForm();
+	let navigate = useNavigate();
+	const location = useLocation();
+	const redirect_uri = location.state?.from || "/home";
 
-	const { setUser, setError, setIsLoading, signInUsingGoogle, processLogin } = useFirebase();
+	const { setUser, error, saveUser, setError, setIsLoading, signInUsingGoogle, processLogin } =
+		useFirebase();
 
 	//* Google Sign In Handler Method
 	const handleGoogleSignIn = () => {
@@ -16,8 +20,8 @@ const Login = () => {
 			.then((res) => {
 				const user = res.user;
 				setUser(user);
-				// saveUser(user.email, user.displayName, user.photoURL, "PUT");
-				// history.push(redirect_uri);
+				saveUser(user.email, user.displayName, user.photoURL, "PUT");
+				navigate(redirect_uri);
 			})
 			.catch((error) => {
 				setError(error.message);
@@ -32,7 +36,7 @@ const Login = () => {
 			.then((res) => {
 				setUser(res.user);
 				setError("");
-				// history.push(redirect_uri);
+				navigate(redirect_uri);
 			})
 			.catch((error) => {
 				setError(error.message);
@@ -74,7 +78,7 @@ const Login = () => {
 						</p>
 					</Link>
 				</form>
-				<p className='text-center py-3 font-semibold text-brand-12'>Error Will be Here!!</p>
+				<p className='text-center py-3 font-semibold text-brand-12'>{error}</p>
 				<hr className='border-0 w-80 bg-bluegray-300 text-gray-500 h-px'></hr>
 				<div className='flex justify-center mb-80'>
 					<button
