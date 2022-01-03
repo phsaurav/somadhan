@@ -11,7 +11,8 @@ const Login = () => {
 	const location = useLocation();
 	const redirect_uri = location.state?.from || "/home";
 
-	const { setUser, error, setError, setIsLoading, signInUsingGoogle, processLogin } = useFirebase();
+	const { setUser, error, saveUser, setError, setIsLoading, signInUsingGoogle, processLogin } =
+		useFirebase();
 
 	//* Google Sign In Handler Method
 	const handleGoogleSignIn = () => {
@@ -19,7 +20,7 @@ const Login = () => {
 			.then((res) => {
 				const user = res.user;
 				setUser(user);
-				// saveUser(user.email, user.displayName, user.photoURL, "PUT");
+				saveUser(user.email, user.displayName, user.photoURL, "PUT");
 				navigate(redirect_uri);
 			})
 			.catch((error) => {

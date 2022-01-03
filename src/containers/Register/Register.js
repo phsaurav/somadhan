@@ -6,7 +6,7 @@ import useFirebase from "../../hooks/useFirebase";
 
 const Register = () => {
 	const { handleSubmit, register } = useForm();
-	const { auth, error, setUser, setError, setIsLoading, createNewUser, updateProfile } =
+	const { auth, error, saveUser, setUser, setError, setIsLoading, createNewUser, updateProfile } =
 		useFirebase();
 
 	const location = useLocation();
@@ -31,12 +31,9 @@ const Register = () => {
 			.then((res) => {
 				const email = data.email;
 				const newUser = { email, displayName: data.name };
-				const url =
-					data.gender === "male"
-						? "https://i.ibb.co/7VH1GDT/male.png"
-						: "https://i.ibb.co/VmSVPNR/female.png";
+				const url = "https://i.ibb.co/VmSVPNR/female.png";
 				setUser(newUser);
-				// saveUser(data.email, data.name, url, "POST");
+				saveUser(data.email, data.name, url, data.admin, "POST");
 				updateProfile(auth.currentUser, {
 					displayName: data.name,
 					photoURL: url,
@@ -95,13 +92,13 @@ const Register = () => {
 					/>
 					<select
 						className='text-sm w-80 bg-gray-100 flex flex-row justify-between h-12 pl-5 rounded-lg my-5 pr-5 text-center'
-						name='Gender'
-						{...register("gender")}
+						name='Admin'
+						{...register("admin")}
 					>
-						<option value='male' className='text-center'>
+						<option value='user' className='text-center'>
 							User Account
 						</option>
-						<option value='female' className='text-center'>
+						<option value='admin' className='text-center'>
 							Admin Account
 						</option>
 					</select>
