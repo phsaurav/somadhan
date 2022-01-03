@@ -27,9 +27,9 @@ module.exports = {
 			blue: colors.blue,
 			lime: colors.lime,
 			brand: {
-				1: "#1e1e1e",
-				2: "#666666",
-				3: "#000000",
+				1: "#E28039",
+				2: "#333137",
+				3: "#EFA543",
 				4: "#ffffff",
 				5: "#A1A1AA",
 				6: "#333333",
