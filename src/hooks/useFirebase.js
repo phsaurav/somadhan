@@ -90,6 +90,7 @@ const useFirebase = () => {
 		auth,
 		user,
 		admin,
+		setAdmin,
 		name,
 		token,
 		error,
