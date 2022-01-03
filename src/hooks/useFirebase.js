@@ -55,7 +55,7 @@ const useFirebase = () => {
 	//*Save New User to backend
 	const saveUser = (email, displayName, photoURL, isAdmin = "user", method) => {
 		const user = { email, displayName, photoURL, isAdmin };
-		fetch("http://localhost:5000/user", {
+		fetch("https://specssphere.herokuapp.com/user", {
 			method: method,
 			headers: {
 				"content-type": "application/json",
