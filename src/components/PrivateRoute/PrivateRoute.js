@@ -5,7 +5,6 @@ import "./PrivateRoute.css";
 
 const PrivateRoute = ({ children, ...rest }) => {
 	const user = useSelector((state) => state.data.user);
-	const admin = useSelector((state) => state.data.admin);
 	const isLoading = useSelector((state) => state.data.isLoading);
 	const location = useLocation();
 
