@@ -8,7 +8,7 @@ const PrivateRoute = ({ children, ...rest }) => {
 
 	const isLoading = useSelector((state) => state.data.isLoading);
 	const location = useLocation();
-	console.log(children);
+
 	if (isLoading) {
 		return (
 			<div className=' flex justify-center items-center min-h-screen mb-40'>

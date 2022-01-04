@@ -9,7 +9,7 @@ const initialState = {
 	user: {},
 	name: "",
 	error: "",
-	isLoading: true,
+	isLoading: false,
 	admin: "user",
 	token: "",
 };
