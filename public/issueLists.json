@@ -2,7 +2,7 @@
   {
     "issue_name": "How to Be an Antiracist",
     "displayName": "Ibram X. Kendi",
-    "_id": "0",
+    "key": "0",
     "date": "24 September 2021",
     "time": "10:00 PM",
 		"adminEmail": "phsaurav29@gmail.com",
@@ -14,7 +14,7 @@
   {
     "issue_name": "This is issue number 2",
 		"displayName": "Tumpa",
-		"_id": "1",
+		"key": "1",
 		"date": "24 September 2021",
 		"time": "11:00 PM",
 		"adminEmail": "phsaurav29@gmail.com",
@@ -26,7 +26,7 @@
   {
     "issue_name": "This is issue number 3",
 		"displayName": "Zhumpa",
-		"_id": "2",
+		"key": "2",
 		"date": "24 September 2021",
 		"time": "12:00 PM",
 		"adminEmail": "hossainp9@gmail.com",
@@ -38,7 +38,7 @@
  {
 	"issue_name": "This is issue number 4",
 	"displayName": "Arifa",
-	"_id": "2",
+	"key": "2",
 	"date": "24 September 2021",
 	"time": "09:00 PM",
 	"adminEmail": "hossainp9@gmail.com",
