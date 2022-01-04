@@ -54,7 +54,7 @@ const useFirebase = () => {
 
 	const saveUser = (email, displayName, photoURL, admin = "", method) => {
 		const user = { email, displayName, photoURL, role: admin };
-		fetch("https://specssphere.herokuapp.com/users", {
+		fetch("https://somadhanapp.herokuapp.com/users", {
 			method: method,
 			headers: {
 				"content-type": "application/json",
@@ -64,7 +64,7 @@ const useFirebase = () => {
 	};
 
 	useEffect(() => {
-		fetch(`https://specssphere.herokuapp.com/users/${user?.email}`)
+		fetch(`https://somadhanapp.herokuapp.com/users/${user?.email}`)
 			.then((res) => res.json())
 			.then((data) => {
 				dispatch(setAdmin(data.admin));
