@@ -29,57 +29,51 @@ const AddIssue = () => {
 				<div className="mx-auto mt-8">
 					<h1 className="font-bold uppercase leading-10 text-5xl">Add an issue</h1>
 				</div>
-				<form className="mx-auto mt-8 flex-col justify-center items-center" onSubmit={handleSubmit(onSubmit)}>
+				<form className="mx-auto mt-8 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
                             <input 
                                 {...register("name", { required: true, maxLength: 20 })}
                                 placeholder="Name" 
-                                className="border-2 p-2 m-2 lg:w-96 w-3/4"
+                                className="border-2 p-2 m-2 md:w-96"
                                 // defaultValue={user.displayName}
-                            />
-                            <br />  
+                            /> 
                             <input 
                                 readOnly
                                 {...register("email", { required: true })}
                                 placeholder="Email" 
-                                className="border-2 p-2 m-2 lg:w-96 w-3/4"
+                                className="border-2 p-2 m-2"
                                 // defaultValue={user.email}
                                 // disabled
                             />
-                            <br /> 
                             <input 
                                 type="tel"
                                 {...register("mobile", { required: true })}
                                 placeholder="Mobile Number" 
-                                className="border-2 p-2 m-2 lg:w-96 w-3/4"
+                                className="border-2 p-2 m-2"
                             />
-                            <br />  
                             <input
                                 readOnly
                                 {...register("date", { required: true })}
                                 placeholder="Date" 
                                 defaultValue={d.toLocaleDateString()}
-                                className="border-2 p-2 m-2 lg:w-96 w-3/4"
+                                className="border-2 p-2 m-2"
                                 // disabled
                             />
-							<br />
                             <input
                                 readOnly
                                 {...register("time", { required: true })}
                                 placeholder="Time" 
                                 defaultValue={d.toLocaleTimeString()}
-                                className="border-2 p-2 m-2 lg:w-96 w-3/4"
+                                className="border-2 p-2 m-2"
                                 // disabled
                             />
-                            <br />  
                             <textarea
                                 {...register("productname")}
                                 placeholder="Issue Here" 
                                 // defaultValue={el.name}
                                 // disabled
-                                className="border-2 p-2 m-2 lg:w-96 w-3/4"
+                                className="border-2 p-2 m-2"
                             />
-                            <br />
-                            <input type="submit" className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 " />
+                            <input type="submit" className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-red-300 dark:focus:ring-red-800  shadow-red-500/50 dark:shadow-red-800/80 font-medium rounded-lg text-sm py-2.5" />
 							
                         </form>
 				
