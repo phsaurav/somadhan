@@ -1,8 +1,15 @@
-.toggleDetails {
+/* .toggleDetails {
   height: 300px;
   transition: 0.3s all;
   line-height: 25px;
-}
+} */
 #detailsContainer {
   overflow: hidden;
 }
+
+#detailsContainer:hover {
+  height: 270px;
+  transition: 0.3s all;
+}
+
+/* line-height: 25px; */
