@@ -10,9 +10,10 @@ const AddIssue = () => {
 			</div>
 
 			<div className='flex flex-col justify-between w-full'>
-				<div>
-					<h1>This is add Issue conatiner for user</h1>
+				<div className="mx-auto mt-8">
+					<h1 className="font-bold uppercase leading-10 text-5xl">Add an issue</h1>
 				</div>
+				
 				<Footer></Footer>
 			</div>
 		</div>
