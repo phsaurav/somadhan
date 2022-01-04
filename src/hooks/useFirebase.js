@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import initializeAuthentication from "../services/Firebase/firebase.init";
 import {
 	getAuth,
@@ -70,6 +70,7 @@ const useFirebase = () => {
 			.then((data) => {
 				dispatch(setAdmin(data.admin));
 			});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user?.email]);
 
 	useEffect(() => {

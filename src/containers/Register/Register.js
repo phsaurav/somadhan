@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../../assets/logo_title_square.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { setError, setIsLoading, setUser } from "../../redux/slices/firebaseSlice";
@@ -9,7 +9,6 @@ import useFirebase from "../../hooks/useFirebase";
 const Register = () => {
 	const { handleSubmit, register } = useForm();
 	const { auth, createNewUser, updateProfile, saveUser } = useFirebase();
-	const location = useLocation();
 	let navigate = useNavigate();
 	const dispatch = useDispatch();
 	const error = useSelector((state) => state.data.error);
