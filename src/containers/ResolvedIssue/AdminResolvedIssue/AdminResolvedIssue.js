@@ -10,6 +10,7 @@ const AdminResolvedIssue = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(adminIssue({ email: user.email, status: "resolved" }));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const resolvedIssue = useSelector((state) => state.issue.resolvedIssue);

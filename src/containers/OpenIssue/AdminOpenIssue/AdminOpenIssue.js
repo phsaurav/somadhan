@@ -10,6 +10,7 @@ const AdminOpenIssue = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(adminIssue({ email: user.email, status: "open" }));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const openIssue = useSelector((state) => state.issue.openIssue);

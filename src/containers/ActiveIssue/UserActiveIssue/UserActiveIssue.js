@@ -10,6 +10,7 @@ const UserActiveIssue = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(userIssue({ email: user.email, status: "active" }));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const activeIssues = useSelector((state) => state.issue.activeIssue);
