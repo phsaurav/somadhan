@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { BsGoogle } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
 import useFirebase from "../../hooks/useFirebase";
-import { setError, setIsLoading, setUser } from "../../redux/slices/firebaseSlice";
+import { saveUser, setError, setIsLoading, setUser } from "../../redux/slices/firebaseSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
@@ -25,6 +25,13 @@ const Login = () => {
 				const user = res.user;
 				dispatch(setUser(user));
 				navigate(redirect_uri);
+				const newUser = {
+					email: user.email,
+					name: user.displayName,
+					photoURL: user.photoURL,
+					role: "",
+				};
+				dispatch(saveUser({ user: newUser, method: "PUT" }));
 			})
 			.catch((error) => {
 				dispatch(setError(error.message));

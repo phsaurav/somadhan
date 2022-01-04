@@ -1,9 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// export const fetchBooks = createAsyncThunk("book/fetchBooks", async () => {
-// 	const response = await fetch("./books.json").then((res) => res.json());
-// 	return response.data;
-// });
+export const saveUser = createAsyncThunk("data/saveUser", async (data) => {
+	console.log(data);
+	try {
+		const res = await fetch("https://somadhanapp.herokuapp.com/users", {
+			method: data.method,
+			headers: {
+				"content-type": "application/json",
+			},
+			body: JSON.stringify(data.user),
+		});
+		const response = await res.json();
+		return response;
+	} catch (err) {}
+});
 
 const initialState = {
 	user: {},
@@ -37,11 +47,11 @@ export const firebaseSlice = createSlice({
 			state.token = payload;
 		},
 	},
-	// extraReducers: (builder) => {
-	// 	builder.addCase(fetchBooks.fulfilled, (state, action) => {
-	// 		state.discover = action.payload;
-	// 	});
-	// },
+	extraReducers: (builder) => {
+		builder.addCase(saveUser.fulfilled, (state, action) => {
+			console.log(action.payload);
+		});
+	},
 });
 
 export const { setUser, setName, setError, setIsLoading, setAdmin, setToken } =
