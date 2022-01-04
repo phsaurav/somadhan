@@ -3,12 +3,12 @@ import logo from "../../assets/logo_title_square.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { setError, setIsLoading, setUser } from "../../redux/slices/firebaseSlice";
+import { saveUser, setError, setIsLoading, setUser } from "../../redux/slices/firebaseSlice";
 import useFirebase from "../../hooks/useFirebase";
 
 const Register = () => {
 	const { handleSubmit, register } = useForm();
-	const { auth, createNewUser, updateProfile, saveUser } = useFirebase();
+	const { auth, createNewUser, updateProfile } = useFirebase();
 	let navigate = useNavigate();
 	const dispatch = useDispatch();
 	const error = useSelector((state) => state.data.error);
@@ -40,7 +40,6 @@ const Register = () => {
 					.then(() => {})
 					.catch((err) => {});
 				dispatch(setError(""));
-
 				dispatch(setUser(res.user));
 			})
 			.catch((error) => {
@@ -52,8 +51,10 @@ const Register = () => {
 				window.location.reload();
 			});
 		const url2 = "https://i.ibb.co/VmSVPNR/male.png";
-		saveUser(data.email, data.name, url2, data.admin, "POST");
+		const user = { email: data.email, displayName: data.name, photoURL: url2, role: data.admin };
+		dispatch(saveUser({ user, method: "POST" }));
 	};
+
 	return (
 		<div className='w-full h-full fixed block top-0 left-0 bg-white  z-30 '>
 			<div className='flex flex-col justify-center items-center h-screen'>
