@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const adminIssue = createAsyncThunk("issue/adminIssue", async (data) => {
 	try {
-		const res = await fetch("http://localhost:5000/admin/byemail", {
+		const res = await fetch("https://somadhanapp.herokuapp.com/admin/byemail", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
@@ -16,7 +16,7 @@ export const adminIssue = createAsyncThunk("issue/adminIssue", async (data) => {
 
 export const userIssue = createAsyncThunk("issue/userIssue", async (data) => {
 	try {
-		const res = await fetch("http://localhost:5000/user/byemail", {
+		const res = await fetch("https://somadhanapp.herokuapp.com/user/byemail", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
