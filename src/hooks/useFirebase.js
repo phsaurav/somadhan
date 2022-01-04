@@ -17,12 +17,6 @@ import { setAdmin, setIsLoading, setToken, setUser } from "../redux/slices/fireb
 initializeAuthentication();
 
 const useFirebase = () => {
-	// const [user, setUser] = useState({});
-	// const [name, setName] = useState("");
-	// const [error, setError] = useState("");
-	// const [isLoading, setIsLoading] = useState(true);
-	// const [admin, setAdmin] = useState(false);
-	// const [token, setToken] = useState("");
 	const auth = getAuth();
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.data.user);
@@ -52,19 +46,19 @@ const useFirebase = () => {
 		return createUserWithEmailAndPassword(auth, email, password);
 	};
 
-	const saveUser = (email, displayName, photoURL, admin = "", method) => {
-		const user = { email, displayName, photoURL, role: admin };
-		fetch("https://specssphere.herokuapp.com/users", {
-			method: method,
-			headers: {
-				"content-type": "application/json",
-			},
-			body: JSON.stringify(user),
-		}).then();
-	};
+	// const saveUser = (email, displayName, photoURL, admin = "", method) => {
+	// 	const user = { email, displayName, photoURL, role: admin };
+	// 	fetch("https://somadhanapp.herokuapp.com/users", {
+	// 		method: method,
+	// 		headers: {
+	// 			"content-type": "application/json",
+	// 		},
+	// 		body: JSON.stringify(user),
+	// 	}).then();
+	// };
 
 	useEffect(() => {
-		fetch(`https://specssphere.herokuapp.com/users/${user?.email}`)
+		fetch(`https://somadhanapp.herokuapp.com/users/${user?.email}`)
 			.then((res) => res.json())
 			.then((data) => {
 				dispatch(setAdmin(data.admin));
@@ -93,7 +87,7 @@ const useFirebase = () => {
 		logOut,
 		signInUsingGoogle,
 		createNewUser,
-		saveUser,
+		// saveUser,
 		updateProfile,
 	};
 };

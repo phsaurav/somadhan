@@ -1,0 +1,8 @@
+.toggleDetails {
+  height: 300px;
+  transition: 0.3s all;
+  line-height: 25px;
+}
+#detailsContainer {
+  overflow: hidden;
+}
