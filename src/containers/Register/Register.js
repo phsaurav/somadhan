@@ -97,7 +97,7 @@ const Register = () => {
 						name='Admin'
 						{...register("admin")}
 					>
-						<option value='user' className='text-center'>
+						<option value='' className='text-center'>
 							User Account
 						</option>
 						<option value='admin' className='text-center'>

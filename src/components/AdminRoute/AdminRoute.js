@@ -1,9 +1,9 @@
 import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import "./PrivateRoute.css";
+import { Navigate, useLocation } from "react-router-dom";
+import "./AdminRoute.css";
 
-const PrivateRoute = ({ children, ...rest }) => {
+const AdminRoute = ({ children, ...rest }) => {
 	const user = useSelector((state) => state.data.user);
 	const admin = useSelector((state) => state.data.admin);
 	const isLoading = useSelector((state) => state.data.isLoading);
@@ -16,11 +16,11 @@ const PrivateRoute = ({ children, ...rest }) => {
 			</div>
 		);
 	}
-	return user?.displayName ? (
+	return user?.email && admin ? (
 		children
 	) : (
 		<Navigate to='/login' replace state={{ path: location.pathname }} />
 	);
 };
 
-export default PrivateRoute;
+export default AdminRoute;

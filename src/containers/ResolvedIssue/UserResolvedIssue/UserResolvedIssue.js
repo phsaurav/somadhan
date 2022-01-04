@@ -1,8 +1,8 @@
 import React from "react";
-import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../../components/Footer/Footer";
+import Navbar from "../../../components/Navbar/Navbar";
 
-const AddIssue = () => {
+const UserResolvedIssue = () => {
 	return (
 		<div className='flex flex-col md:flex-row'>
 			<div className='md:min-h-screen md:w-80 xl:w-96'>
@@ -11,7 +11,7 @@ const AddIssue = () => {
 
 			<div className='flex flex-col justify-between w-full'>
 				<div>
-					<h1>This is add Issue conatiner for user</h1>
+					<h1>This is Users Resolved Issues Container</h1>
 				</div>
 				<Footer></Footer>
 			</div>
@@ -19,4 +19,4 @@ const AddIssue = () => {
 	);
 };
 
-export default AddIssue;
+export default UserResolvedIssue;

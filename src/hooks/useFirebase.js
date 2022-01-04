@@ -52,9 +52,8 @@ const useFirebase = () => {
 		return createUserWithEmailAndPassword(auth, email, password);
 	};
 
-	const saveUser = (email, displayName, photoURL, admin = "user", method) => {
-		const user = { email, displayName, photoURL, admin };
-		console.log(user);
+	const saveUser = (email, displayName, photoURL, admin = "", method) => {
+		const user = { email, displayName, photoURL, role: admin };
 		fetch("https://specssphere.herokuapp.com/users", {
 			method: method,
 			headers: {

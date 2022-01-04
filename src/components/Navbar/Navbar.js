@@ -1,17 +1,35 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo_title_dark.png";
 import { Transition } from "@headlessui/react";
 import { BiUser } from "react-icons/bi";
 import "./Navbar.css";
 import useFirebase from "../../hooks/useFirebase";
 import { useSelector } from "react-redux";
+import { NavLink as BaseNavLink } from "react-router-dom";
+
+const NavLink = React.forwardRef(({ activeClassName, activeStyle, ...props }, ref) => {
+	return (
+		<BaseNavLink
+			ref={ref}
+			{...props}
+			className={({ isActive }) =>
+				[props.className, isActive ? activeClassName : null].filter(Boolean).join(" ")
+			}
+			style={({ isActive }) => ({
+				...props.style,
+				...(isActive ? activeStyle : null),
+			})}
+		/>
+	);
+});
 
 const Navbar = () => {
 	const { logOut } = useFirebase();
 	const user = useSelector((state) => state.data.user);
 	const admin = useSelector((state) => state.data.admin);
 	const [isOpen, setIsOpen] = useState(false);
+
 	return (
 		<div className='md:min-h-screen md:w-96'>
 			<div className='bg-brand-2 md:min-h-screen md:w-80 xl:w-96 md:fixed z-50'>
@@ -70,7 +88,19 @@ const Navbar = () => {
 											{!admin ? (
 												<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base text-center'>
 													<NavLink
-														to='/dashboard/myorders'
+														to='/user/addIssue'
+														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'
+														activeStyle={{
+															backgroundColor: "#FFFFFF",
+															color: "#000000",
+															fontWeight: "600",
+															backgroundSize: "100% 0px",
+														}}
+													>
+														Create Issue
+													</NavLink>
+													<NavLink
+														to='/openIssue'
 														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'
 														activeStyle={{
 															backgroundColor: "#FFFFFF",
@@ -82,7 +112,7 @@ const Navbar = () => {
 														Open Issues
 													</NavLink>
 													<NavLink
-														to='/dashboard/pay'
+														to='/activeIssue'
 														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'
 														style={{
 															fontWeight: "500",
@@ -97,7 +127,7 @@ const Navbar = () => {
 														Active Issues
 													</NavLink>
 													<NavLink
-														to='/dashboard/addreview'
+														to='/resolvedissue'
 														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'
 														style={{
 															fontWeight: "500",
@@ -115,7 +145,7 @@ const Navbar = () => {
 											) : (
 												<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base text-center'>
 													<NavLink
-														to='/dashboard/addadmin'
+														to='/admin/analytics'
 														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'
 														style={{
 															fontWeight: "500",
@@ -130,7 +160,7 @@ const Navbar = () => {
 														Issue Analytics
 													</NavLink>
 													<NavLink
-														to='/dashboard/allorders'
+														to='/openissue'
 														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'
 														style={{
 															fontWeight: "500",
@@ -145,7 +175,7 @@ const Navbar = () => {
 														Open Issues
 													</NavLink>
 													<NavLink
-														to='/dashboard/manageproduct'
+														to='/activeissue'
 														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'
 														style={{
 															fontWeight: "500",
@@ -160,7 +190,7 @@ const Navbar = () => {
 														Active Issues
 													</NavLink>
 													<NavLink
-														to='/dashboard/addproduct'
+														to='/resolvedissue'
 														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'
 														style={{
 															fontWeight: "500",
@@ -240,134 +270,108 @@ const Navbar = () => {
 						{(ref) => (
 							<div className='md:hidden ' id='mobile-menu'>
 								<div ref={ref} className=' pt-2   text-center mx-auto bg-brand-1'>
-									<NavLink
-										to='/home'
-										className='font-semibold text-white hover:bg-white hover:text-brand-2 block px-3   text-base w-full border-b border-brand-2 py-3'
-										activeStyle={{
-											backgroundColor: "#FFFFFF",
-											color: "#000000",
-											fontWeight: "600",
-											backgroundSize: "100% 0px",
-										}}
-									>
-										Home
-									</NavLink>
-									<NavLink
-										to='/explore'
-										className='font-semibold text-white hover:bg-white hover:text-brand-2 block px-3  text-base w-full border-b border-brand-2 py-3'
-										activeStyle={{
-											backgroundColor: "#FFFFFF",
-											color: "#000000",
-											fontWeight: "600",
-											backgroundSize: "100% 0px",
-										}}
-									>
-										All Sunglasses
-									</NavLink>
-
 									{user.displayName ? (
 										<div className='pt-2   text-center mx-auto bg-brand-1'>
-											<NavLink
-												to='/dashboard'
-												className='font-semibold text-brand-1 hover:bg-white hover:text-brand-2 block px-3 text-base w-full border-b border-brand-2 py-3 bg-brand-11'
-												activeStyle={{
-													backgroundColor: "#FFFFFF",
-													color: "#000000",
-													fontWeight: "700",
-													backgroundSize: "100% 0px",
-												}}
-											>
-												Dashboard
-											</NavLink>
 											{!admin ? (
 												<div className='flex items-center flex-col'>
 													<NavLink
-														to='/dashboard/myorders'
-														className='font-semibold text-brand-1 hover:bg-white hover:text-brand-2 block px-3 text-base w-full border-b border-brand-2 py-3 bg-white'
+														to='/user/addIssue'
+														className='font-semibold text-white hover:bg-white hover:text-brand-2 block px-3   text-base w-full border-b border-brand-2 py-3'
 														activeStyle={{
-															backgroundColor: "#A1A1AA",
+															backgroundColor: "#FFFFFF",
 															color: "#000000",
 															fontWeight: "600",
 															backgroundSize: "100% 0px",
 														}}
 													>
-														My Orders
+														Create Issue
 													</NavLink>
 													<NavLink
-														to='/dashboard/pay'
-														className='font-semibold text-brand-1 hover:bg-white hover:text-brand-2 block px-3 text-base w-full border-b border-brand-2 py-3 bg-white'
+														to='/openIssue'
+														className='font-semibold text-white hover:bg-white hover:text-brand-2 block px-3  text-base w-full border-b border-brand-2 py-3'
 														activeStyle={{
-															backgroundColor: "#A1A1AA",
+															backgroundColor: "#FFFFFF",
 															color: "#000000",
 															fontWeight: "600",
 															backgroundSize: "100% 0px",
 														}}
 													>
-														Pay
+														Open Issue
 													</NavLink>
 													<NavLink
-														to='/dashboard/addreview'
-														className='font-semibold text-brand-1 hover:bg-white hover:text-brand-2 block px-3 text-base w-full border-b border-brand-2 py-3 bg-white'
+														to='/activeissue'
+														className='font-semibold text-white hover:bg-white hover:text-brand-2 block px-3  text-base w-full border-b border-brand-2 py-3'
 														activeStyle={{
-															backgroundColor: "#A1A1AA",
+															backgroundColor: "#FFFFFF",
 															color: "#000000",
 															fontWeight: "600",
 															backgroundSize: "100% 0px",
 														}}
 													>
-														Add Review
+														Active Issue
+													</NavLink>
+													<NavLink
+														to='/resolvedissue'
+														className='font-semibold text-white hover:bg-white hover:text-brand-2 block px-3  text-base w-full border-b border-brand-2 py-3'
+														activeStyle={{
+															backgroundColor: "#FFFFFF",
+															color: "#000000",
+															fontWeight: "600",
+															backgroundSize: "100% 0px",
+														}}
+													>
+														Resolved Issue
 													</NavLink>
 												</div>
 											) : (
 												<div className='flex items-center flex-col'>
 													<NavLink
-														to='/dashboard/allorders'
-														className='font-semibold text-brand-1 hover:bg-white hover:text-brand-2 block px-3 text-base w-full border-b border-brand-2 py-3 bg-white'
+														to='/admin/analytics'
+														className='font-semibold text-white hover:bg-white hover:text-brand-2 block px-3   text-base w-full border-b border-brand-2 py-3'
 														activeStyle={{
-															backgroundColor: "#A1A1AA",
+															backgroundColor: "#FFFFFF",
 															color: "#000000",
 															fontWeight: "600",
 															backgroundSize: "100% 0px",
 														}}
 													>
-														Manage All Orders
-													</NavLink>
-
-													<NavLink
-														to='/dashboard/manageproduct'
-														className='font-semibold text-brand-1 hover:bg-white hover:text-brand-2 block px-3 text-base w-full border-b border-brand-2 py-3 bg-white'
-														activeStyle={{
-															backgroundColor: "#A1A1AA",
-															color: "#000000",
-															fontWeight: "600",
-															backgroundSize: "100% 0px",
-														}}
-													>
-														Manage All Products
+														Issue Analytics
 													</NavLink>
 													<NavLink
-														to='/dashboard/addproduct'
-														className='font-semibold text-brand-1 hover:bg-white hover:text-brand-2 block px-3 text-base w-full border-b border-brand-2 py-3 bg-white'
+														to='/openIssue'
+														className='font-semibold text-white hover:bg-white hover:text-brand-2 block px-3  text-base w-full border-b border-brand-2 py-3'
 														activeStyle={{
-															backgroundColor: "#A1A1AA",
+															backgroundColor: "#FFFFFF",
 															color: "#000000",
 															fontWeight: "600",
 															backgroundSize: "100% 0px",
 														}}
 													>
-														Add a Product
+														Open Issue
 													</NavLink>
 													<NavLink
-														to='/dashboard/addadmin'
-														className='font-semibold text-brand-1 hover:bg-white hover:text-brand-2 block px-3 text-base w-full border-b border-brand-2 py-3 bg-white'
+														to='/activeissue'
+														className='font-semibold text-white hover:bg-white hover:text-brand-2 block px-3  text-base w-full border-b border-brand-2 py-3'
 														activeStyle={{
-															backgroundColor: "#A1A1AA",
+															backgroundColor: "#FFFFFF",
 															color: "#000000",
 															fontWeight: "600",
 															backgroundSize: "100% 0px",
 														}}
 													>
-														Make Admin
+														Active Issue
+													</NavLink>
+													<NavLink
+														to='/resolvedissue'
+														className='font-semibold text-white hover:bg-white hover:text-brand-2 block px-3  text-base w-full border-b border-brand-2 py-3'
+														activeStyle={{
+															backgroundColor: "#FFFFFF",
+															color: "#000000",
+															fontWeight: "600",
+															backgroundSize: "100% 0px",
+														}}
+													>
+														Resolved Issue
 													</NavLink>
 												</div>
 											)}

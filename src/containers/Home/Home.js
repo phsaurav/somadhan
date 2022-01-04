@@ -10,9 +10,7 @@ const Home = () => {
 			</div>
 
 			<div className='flex flex-col justify-between w-full'>
-				<div>
-					<h1>This is Dashboard</h1>
-				</div>
+				<div></div>
 				<Footer></Footer>
 			</div>
 		</div>

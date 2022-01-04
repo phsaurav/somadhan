@@ -10,7 +10,7 @@ const initialState = {
 	name: "",
 	error: "",
 	isLoading: false,
-	admin: "user",
+	admin: "",
 	token: "",
 };
 

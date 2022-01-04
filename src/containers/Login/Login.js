@@ -12,7 +12,7 @@ const Login = () => {
 	const { handleSubmit, register } = useForm();
 	let navigate = useNavigate();
 	const location = useLocation();
-	const redirect_uri = location.state?.from || "/home";
+	const redirect_uri = location.state?.from || "/";
 	const dispatch = useDispatch();
 	const error = useSelector((state) => state.data.error);
 
