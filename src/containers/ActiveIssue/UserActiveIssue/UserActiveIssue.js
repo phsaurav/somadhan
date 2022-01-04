@@ -1,5 +1,6 @@
 import React from "react";
 import Footer from "../../../components/Footer/Footer";
+import IssueCard from "../../../components/IssueCard/IssueCard";
 import Navbar from "../../../components/Navbar/Navbar";
 
 const UserActiveIssue = () => {
@@ -11,7 +12,7 @@ const UserActiveIssue = () => {
 
 			<div className='flex flex-col justify-between w-full'>
 				<div>
-					<h1>This is User Active issue Container</h1>
+					<IssueCard></IssueCard>
 				</div>
 				<Footer></Footer>
 			</div>
