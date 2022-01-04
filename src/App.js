@@ -72,6 +72,20 @@ function App() {
 						}
 					/>
 					<Route
+						path='/activeissue/:key_id'
+						element={
+							admin ? (
+								<AdminRoute>
+									<AdminActiveIssue />
+								</AdminRoute>
+							) : (
+								<PrivateRoute>
+									<UserActiveIssue />
+								</PrivateRoute>
+							)
+						}
+					/>
+					<Route
 						path='/resolvedissue'
 						element={
 							admin ? (
