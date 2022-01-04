@@ -1,11 +1,14 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import useFirebase from "../../hooks/useFirebase";
+import { useSelector } from "react-redux";
 import "./PrivateRoute.css";
 
 const PrivateRoute = ({ children, ...rest }) => {
-	const { user, isLoading } = useFirebase();
+	const user = useSelector((state) => state.data.user);
+
+	const isLoading = useSelector((state) => state.data.isLoading);
 	const location = useLocation();
+	console.log(children);
 	if (isLoading) {
 		return (
 			<div className=' flex justify-center items-center min-h-screen mb-40'>
@@ -13,7 +16,7 @@ const PrivateRoute = ({ children, ...rest }) => {
 			</div>
 		);
 	}
-	return user.email ? (
+	return user?.displayName ? (
 		children
 	) : (
 		<Navigate to='/login' replace state={{ path: location.pathname }} />

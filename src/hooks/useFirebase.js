@@ -11,50 +11,50 @@ import {
 	createUserWithEmailAndPassword,
 	getIdToken,
 } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { setAdmin, setIsLoading, setToken, setUser } from "../redux/slices/firebaseSlice";
 
 initializeAuthentication();
 
 const useFirebase = () => {
-	const [user, setUser] = useState({});
-	const [name, setName] = useState("");
-	const [error, setError] = useState("");
-	const [isLoading, setIsLoading] = useState(true);
-	const [admin, setAdmin] = useState(false);
-	const [token, setToken] = useState("");
+	// const [user, setUser] = useState({});
+	// const [name, setName] = useState("");
+	// const [error, setError] = useState("");
+	// const [isLoading, setIsLoading] = useState(true);
+	// const [admin, setAdmin] = useState(false);
+	// const [token, setToken] = useState("");
 	const auth = getAuth();
+	const dispatch = useDispatch();
+	const user = useSelector((state) => state.data.user);
 
-	//* Google Sign In handler
 	const signInUsingGoogle = () => {
-		setIsLoading(true);
+		dispatch(setIsLoading(true));
 		const googleProvider = new GoogleAuthProvider();
 		return signInWithPopup(auth, googleProvider);
 	};
 
-	//* Logout handler
 	const logOut = () => {
-		setIsLoading(true);
+		dispatch(setIsLoading(true));
 		signOut(auth)
 			.then(() => {
-				setUser({});
+				dispatch(setUser({}));
 			})
-			.finally(() => setIsLoading(false));
+			.finally(() => dispatch(setIsLoading(false)));
 	};
 
-	//* Email Password Login handler
 	const processLogin = (email, password) => {
-		setIsLoading(true);
+		dispatch(setIsLoading(true));
 		return signInWithEmailAndPassword(auth, email, password);
 	};
 
-	//*Sign Up handler
 	const createNewUser = (email, password) => {
-		setIsLoading(true);
+		dispatch(setIsLoading(true));
 		return createUserWithEmailAndPassword(auth, email, password);
 	};
 
-	//*Save New User to backend
-	const saveUser = (email, displayName, photoURL, isAdmin = "user", method) => {
-		const user = { email, displayName, photoURL, isAdmin };
+	const saveUser = (email, displayName, photoURL, admin = "user", method) => {
+		const user = { email, displayName, photoURL, admin };
+		console.log(user);
 		fetch("https://specssphere.herokuapp.com/users", {
 			method: method,
 			headers: {
@@ -64,53 +64,36 @@ const useFirebase = () => {
 		}).then();
 	};
 
-	//*Load User Information from backend
-	// useEffect(() => {
-	// 	fetch(`https://specssphere.herokuapp.com/users/${user?.email}`)
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			setAdmin(data.admin);
-	// 			const newAdmin = data.admin;
-	// 			if (user.email) {
-	// 				sessionStorage.setItem("admin", newAdmin.toString());
-	// 			}
-	// 		});
-	// }, [user?.email]);
+	useEffect(() => {
+		fetch(`https://specssphere.herokuapp.com/users/${user?.email}`)
+			.then((res) => res.json())
+			.then((data) => {
+				dispatch(setAdmin(data.admin));
+			});
+	}, [user?.email]);
 
-	//* Firebase state change monitor
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
-				setUser(user);
+				dispatch(setUser(user));
 				getIdToken(user).then((idToken) => {
-					setToken(idToken);
+					dispatch(setToken(idToken));
 				});
 			} else {
-				setUser({});
+				dispatch(setUser({}));
 			}
-			setIsLoading(false);
+			dispatch(setIsLoading(false));
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return {
 		auth,
-		user,
-		admin,
-		setAdmin,
-		name,
-		token,
-		error,
-		isLoading,
-		setUser,
-		setError,
-		setIsLoading,
 		processLogin,
 		logOut,
 		signInUsingGoogle,
 		createNewUser,
 		saveUser,
-		setName,
 		updateProfile,
 	};
 };

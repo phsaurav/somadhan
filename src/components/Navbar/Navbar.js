@@ -5,9 +5,12 @@ import { Transition } from "@headlessui/react";
 import { BiUser } from "react-icons/bi";
 import "./Navbar.css";
 import useFirebase from "../../hooks/useFirebase";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-	const { user, logOut, admin } = useFirebase();
+	const { logOut } = useFirebase();
+	const user = useSelector((state) => state.data.user);
+	const admin = useSelector((state) => state.data.admin);
 	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<div className='md:min-h-screen md:w-96'>
@@ -61,46 +64,9 @@ const Navbar = () => {
 											</NavLink>
 										</div>
 									)}
-									<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base text-center'>
-										<NavLink
-											to='/home'
-											className='font-base  text-bluegray-300 transition duration-500 ease-in-out hover:font-semibold hover:text-white link-underline  px-3 lg:px-6 py-4 link link-underline border-b border-brand-6 text-sm'
-											activeStyle={{
-												backgroundColor: "#FFFFFF",
-												color: "#1e1e1e",
-												fontWeight: "600",
-											}}
-										>
-											Home
-										</NavLink>
-										<NavLink
-											to='/explore'
-											className='font-base text-bluegray-300 transition duration-500 ease-in-out hover:text-white hover:font-semibold link-underline px-3 lg:px-6 py-4 border-b border-brand-6 text-sm'
-											activeStyle={{
-												backgroundColor: "#FFFFFF",
-												color: "#1e1e1e",
-												fontWeight: "600",
-											}}
-										>
-											All Sunglasses
-										</NavLink>
-									</div>
+									<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base text-center'></div>
 									{user.displayName && (
 										<div>
-											<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base text-center'>
-												<NavLink
-													to='/dashboard'
-													className='font-base text-bluegray-300 transition duration-500 ease-in-out hover:text-white link hover:font-semibold link-underline px-3 lg:px-6 py-4 border-b border-white text-sm'
-													activeStyle={{
-														backgroundColor: "#ececec",
-														color: "#1e1e1e",
-														fontWeight: "600",
-														backgroundSize: "100% 0px",
-													}}
-												>
-													Dash Board
-												</NavLink>
-											</div>
 											{!admin ? (
 												<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base text-center'>
 													<NavLink
@@ -113,7 +79,7 @@ const Navbar = () => {
 															backgroundSize: "100% 0px",
 														}}
 													>
-														My Orders
+														Open Issues
 													</NavLink>
 													<NavLink
 														to='/dashboard/pay'
@@ -128,7 +94,7 @@ const Navbar = () => {
 															backgroundSize: "100% 0px",
 														}}
 													>
-														Pay
+														Active Issues
 													</NavLink>
 													<NavLink
 														to='/dashboard/addreview'
@@ -143,11 +109,26 @@ const Navbar = () => {
 															backgroundSize: "100% 0px",
 														}}
 													>
-														Add Review
+														Resolved Issues
 													</NavLink>
 												</div>
 											) : (
-												<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base'>
+												<div className='hidden md:flex flex-col md:w-80 xl:w-96 uppercase text-sm lg:text-base text-center'>
+													<NavLink
+														to='/dashboard/addadmin'
+														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'
+														style={{
+															fontWeight: "500",
+														}}
+														activeStyle={{
+															backgroundColor: "#FFFFFF",
+															color: "#000000",
+															fontWeight: "600",
+															backgroundSize: "100% 0px",
+														}}
+													>
+														Issue Analytics
+													</NavLink>
 													<NavLink
 														to='/dashboard/allorders'
 														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'
@@ -161,7 +142,7 @@ const Navbar = () => {
 															backgroundSize: "100% 0px",
 														}}
 													>
-														Manage All Orders
+														Open Issues
 													</NavLink>
 													<NavLink
 														to='/dashboard/manageproduct'
@@ -176,7 +157,7 @@ const Navbar = () => {
 															backgroundSize: "100% 0px",
 														}}
 													>
-														Manage All Products
+														Active Issues
 													</NavLink>
 													<NavLink
 														to='/dashboard/addproduct'
@@ -191,22 +172,7 @@ const Navbar = () => {
 															backgroundSize: "100% 0px",
 														}}
 													>
-														Add a Product
-													</NavLink>
-													<NavLink
-														to='/dashboard/addadmin'
-														className='font-base text-brand-1transition duration-500 ease-in-out hover:text-black link hover:font-bold link-underline-black px-3 lg:px-6 py-4 border-b border-white bg-brand-11 text-sm'
-														style={{
-															fontWeight: "500",
-														}}
-														activeStyle={{
-															backgroundColor: "#FFFFFF",
-															color: "#000000",
-															fontWeight: "600",
-															backgroundSize: "100% 0px",
-														}}
-													>
-														Make Admin
+														Resolved Issues
 													</NavLink>
 												</div>
 											)}

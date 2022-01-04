@@ -1,52 +1,66 @@
-import React, { useEffect } from "react";
+import React from "react";
 import logo from "../../assets/logo_title_square.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { BsGoogle } from "react-icons/bs";
+import { MdClose } from "react-icons/md";
 import useFirebase from "../../hooks/useFirebase";
+import { setError, setIsLoading, setUser } from "../../redux/slices/firebaseSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
 	const { handleSubmit, register } = useForm();
 	let navigate = useNavigate();
 	const location = useLocation();
 	const redirect_uri = location.state?.from || "/home";
+	const dispatch = useDispatch();
+	const error = useSelector((state) => state.data.error);
 
-	const { setUser, error, saveUser, setError, setIsLoading, signInUsingGoogle, processLogin } =
-		useFirebase();
+	const { signInUsingGoogle, processLogin } = useFirebase();
 
 	//* Google Sign In Handler Method
 	const handleGoogleSignIn = () => {
 		signInUsingGoogle()
 			.then((res) => {
 				const user = res.user;
-				setUser(user);
+				dispatch(setUser(user));
 				navigate(redirect_uri);
 			})
 			.catch((error) => {
-				setError(error.message);
+				dispatch(setError(error.message));
 			})
 			.finally(() => {
-				setIsLoading(false);
+				dispatch(setError(""));
+				dispatch(setIsLoading(false));
 			});
 	};
 
 	const onSubmit = (data) => {
 		processLogin(data.email, data.password)
 			.then((res) => {
-				setUser(res.user);
-				setError("");
+				dispatch(setUser(res.user));
+				dispatch(setError(""));
 				navigate(redirect_uri);
 			})
 			.catch((error) => {
-				setError(error.message);
+				dispatch(setError(error.message));
 			})
 			.finally(() => {
 				window.location.reload();
-				setIsLoading(false);
+				dispatch(setError(""));
+				dispatch(setIsLoading(false));
 			});
 	};
 	return (
 		<div>
+			<Link to='/home'>
+				<button
+					type='button'
+					className='bg-white rounded-md p-2 inline-flex items-center justify-center  fixed top-0 right-0 hover:text-brand-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset  text-2xl focus:ring-indigo-500 text-brand-1'
+				>
+					<MdClose></MdClose>
+				</button>
+			</Link>
 			<div className='flex flex-col justify-center items-center h-screen'>
 				<img src={logo} alt='Logo' style={{ height: "150px" }} />
 

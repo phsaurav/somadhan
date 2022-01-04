@@ -2,56 +2,58 @@ import React from "react";
 import logo from "../../assets/logo_title_square.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { setError, setIsLoading, setUser } from "../../redux/slices/firebaseSlice";
 import useFirebase from "../../hooks/useFirebase";
 
 const Register = () => {
 	const { handleSubmit, register } = useForm();
-	const { auth, error, saveUser, setUser, setError, setIsLoading, createNewUser, updateProfile } =
-		useFirebase();
-
+	const { auth, createNewUser, updateProfile, saveUser } = useFirebase();
 	const location = useLocation();
-	const redirect_uri = location.state?.from || "/home";
 	let navigate = useNavigate();
+	const dispatch = useDispatch();
+	const error = useSelector((state) => state.data.error);
 
 	const onSubmit = (data) => {
 		if (data?.password?.length <= 5) {
-			setError("Password Must be atleast 6 character long");
+			dispatch(setError("Password Must be atleast 6 character long"));
 			return;
 		}
 		if (!/^(?=.*[0-9])/.test(data.password)) {
-			setError("Password Must have one nubmer!");
+			dispatch(setError("Password Must have one nubmer!"));
 			return;
 		}
 		if (data.password !== data.password2) {
-			setError("Password Doesn't match!!");
+			dispatch(setError("Password Doesn't match!!"));
 			return;
 		}
-		setError("");
+		dispatch(setError(""));
 		createNewUser(data.email, data.password)
 			.then((res) => {
-				setUser(newUser);
+				const email = data.email;
+				const newUser = { email, displayName: data.name };
+				dispatch(setUser(newUser));
+				const url = "https://i.ibb.co/VmSVPNR/male.png";
 				updateProfile(auth.currentUser, {
 					displayName: data.name,
 					photoURL: url,
 				})
 					.then(() => {})
 					.catch((err) => {});
-				setError("");
-				navigate(redirect_uri);
-				window.location.reload();
-				setUser(res.user);
+				dispatch(setError(""));
+
+				dispatch(setUser(res.user));
 			})
 			.catch((error) => {
-				setError(error.message);
+				dispatch(setError(error.message));
 			})
 			.finally(() => {
-				setIsLoading(false);
+				navigate("/home");
+				dispatch(setIsLoading(false));
+				window.location.reload();
 			});
-
-		const email = data.email;
-		const newUser = { email, displayName: data.name };
-		const url = "https://i.ibb.co/VmSVPNR/female.png";
-		saveUser(data.email, data.name, url, data.admin, "POST");
+		const url2 = "https://i.ibb.co/VmSVPNR/male.png";
+		saveUser(data.email, data.name, url2, data.admin, "POST");
 	};
 	return (
 		<div className='w-full h-full fixed block top-0 left-0 bg-white  z-30 '>
