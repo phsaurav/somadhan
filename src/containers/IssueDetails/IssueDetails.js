@@ -41,15 +41,17 @@ const IssueDetails = () => {
 							</div>
 						</div>
 					</div>
-					<div>
-						<p className=' mt-10 mb-2 text-4xl font-base text-center uppercase'>Chat with Admin</p>
-						<div className='flex justify-center'>
-							<div className=' bg-brand-2 h-px w-20 mb-5'></div>
+					{singleIssue.status === "active" && (
+						<div>
+							<p className=' mt-10 mb-2 text-4xl font-base text-center uppercase'>
+								Chat with Admin
+							</p>
+							<div className='flex justify-center'>
+								<div className=' bg-brand-2 h-px w-20 mb-5'></div>
+							</div>
 						</div>
-					</div>
-					<div className='-mt-80 h-full'>
-						<Chat></Chat>
-					</div>
+					)}
+					<div className='-mt-80 h-full'>{singleIssue.status === "active" && <Chat></Chat>}</div>
 				</div>
 				<Footer></Footer>
 			</div>
