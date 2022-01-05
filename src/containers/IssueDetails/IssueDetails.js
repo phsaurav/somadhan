@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
 
 const IssueDetails = () => {
   const { _id } = useParams();
-  console.log(_id);
 
-  const [issues, setIssues] = useState([]);
-  useEffect(() => {
-    fetch('/issueLists.json')
-      .then((res) => res.json())
-      .then((data) => setIssues(data));
-  }, []);
+  const openIssue = useSelector((state) => state.issue.openIssue);
 
-  const singleIssue = issues.find((issue) => issue._id === _id);
+  console.log(openIssue);
+  const singleIssue = openIssue.find((issue) => issue._id === _id);
   console.log(singleIssue);
   return (
     <div className="flex flex-col md:flex-row">
@@ -31,7 +27,7 @@ const IssueDetails = () => {
               </h2>
               <h2 className="text-2xl"> {singleIssue?.time}</h2>
               <h2 className="text-4xl  uppercase font-bold text-orange-400">
-                {singleIssue?.issue_name}
+                {singleIssue?.title}
               </h2>
               <h2 className="text-gray-400  ">{singleIssue?.description}</h2>
               <div className="flex flex-row items-center w-full lg:w-1/3 bg-white lg:justify-end justify-evenly px-2 py-4 mx-auto lg:px-0">
