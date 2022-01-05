@@ -1,25 +1,22 @@
-// import issueList from '../../fakeData/issueLists.json';
+import React from "react";
 import { Link } from "react-router-dom";
-import "./IssueCard.css";
+import { GoIssueOpened } from "react-icons/go";
+import { RiDeleteBinLine } from "react-icons/ri";
 
-const IssueCard = (props) => {
+const UserOpenCard = (props) => {
 	const { date, time, title, description, _id, photoURL, userEmail, displayName } = props.issue;
 
-	const handleStatus = () => {
-		fetch(`https://somadhanapp.herokuapp.com/status/${_id}`, {
-			method: "PUT",
-			headers: {
-				"content-type": "application/json",
-			},
-			body: JSON.stringify({ status: "active" }),
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.modifiedCount > 0) {
-					alert("Status Updated!!");
-				}
-				window.location.reload();
-			});
+	const handleDelete = () => {
+		if (window.confirm("Are you Sure?")) {
+			fetch(`https://somadhanapp.herokuapp.com/issue/${_id}`, {
+				method: "DELETE",
+			})
+				.then((res) => res.text()) // or res.json()
+				.then((res) => {
+					alert("Issue Deletion Complete");
+					window.location.reload();
+				});
+		}
 	};
 
 	return (
@@ -29,7 +26,9 @@ const IssueCard = (props) => {
 					<div>
 						<div className='bg-brand-8 rounded-t-lg md:rounded-l-lg md:h-full h-20 shadow-inner flex justify-center w-40 items-center md:pb-8'>
 							<div className='text-center'>
-								<div className='text-white md:mt-0 xl:h-12  font-bold text-6xl md:text-7xl p-1 leading-8'></div>
+								<div className='text-white md:mt-0 xl:h-12  font-bold text-6xl md:text-7xl p-1 leading-8'>
+									<GoIssueOpened />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -71,11 +70,23 @@ const IssueCard = (props) => {
 							</div>
 						</div>
 					</Link>
-					<div></div>
+					<div>
+						<div
+							onClick={handleDelete}
+							className='hover:border-brand-12 hover:bg-white hover:text-brand-12 text-white bg-brand-12 border-2 rounded-b-lg md:rounded-r-lg md:h-full lg:w-40 h-20 shadow-inner flex justify-center items-center'
+						>
+							<div className='text-center flex md:flex-col items-center'>
+								<div className=' xl:h-12  font-bold md:text-7xl text-5xl p-1 leading-8'>
+									<RiDeleteBinLine />
+								</div>
+								<p className='md:mt-8 text-lg'>Remove</p>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	);
 };
 
-export default IssueCard;
+export default UserOpenCard;

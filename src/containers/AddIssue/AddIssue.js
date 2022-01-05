@@ -14,6 +14,7 @@ const AddIssue = () => {
 		data.displayName = user.name;
 		data.photoURL = user.photoURL;
 		data.userEmail = user.email;
+		data.displayName = user.displayName;
 		data.date = time.toLocaleDateString();
 		data.time = time.toLocaleTimeString();
 		data.status = "open";

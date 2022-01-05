@@ -1,8 +1,9 @@
-// import issueList from '../../fakeData/issueLists.json';
+import React from "react";
 import { Link } from "react-router-dom";
-import "./IssueCard.css";
+import { GoIssueOpened } from "react-icons/go";
+import { IoIosAddCircleOutline } from "react-icons/io";
 
-const IssueCard = (props) => {
+const OpenCard = (props) => {
 	const { date, time, title, description, _id, photoURL, userEmail, displayName } = props.issue;
 
 	const handleStatus = () => {
@@ -29,7 +30,9 @@ const IssueCard = (props) => {
 					<div>
 						<div className='bg-brand-8 rounded-t-lg md:rounded-l-lg md:h-full h-20 shadow-inner flex justify-center w-40 items-center md:pb-8'>
 							<div className='text-center'>
-								<div className='text-white md:mt-0 xl:h-12  font-bold text-6xl md:text-7xl p-1 leading-8'></div>
+								<div className='text-white md:mt-0 xl:h-12  font-bold text-6xl md:text-7xl p-1 leading-8'>
+									<GoIssueOpened />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -71,11 +74,23 @@ const IssueCard = (props) => {
 							</div>
 						</div>
 					</Link>
-					<div></div>
+					<div className='ml-auto'>
+						<div
+							onClick={handleStatus}
+							className='hover:border-brand-6 hover:bg-white hover:text-brand-6 text-white bg-brand-6 border-2 rounded-b-lg md:rounded-r-lg md:h-full lg:w-40 h-20 shadow-inner flex justify-center items-center'
+						>
+							<div className='text-center flex md:flex-col items-center'>
+								<div className=' xl:h-12  font-bold md:text-7xl text-5xl p-1 leading-8'>
+									<IoIosAddCircleOutline />
+								</div>
+								<p className='md:mt-8 text-lg'>Make Active</p>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	);
 };
 
-export default IssueCard;
+export default OpenCard;
