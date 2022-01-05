@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+import Chat from "../../components/Chat/Chat";
 
 const IssueDetails = () => {
 	const { _id } = useParams();
@@ -23,7 +24,7 @@ const IssueDetails = () => {
 			<div className='flex flex-col justify-between w-full'>
 				<div className=' h-full container mx-auto mt-20 '>
 					<div className='xl:flex  block justify-around mt-10'>
-						<div className='  md:w-2/5 mx-auto text-gray-600 text-center  '>
+						<div className='  md:w-4/5 mx-auto text-gray-600 text-center  '>
 							<h2 className='text-2xl font-bold uppercase'>{singleIssue?.date}</h2>
 							<h2 className='text-2xl'> {singleIssue?.time}</h2>
 							<h2 className='text-4xl  uppercase font-bold text-orange-400'>
@@ -39,10 +40,15 @@ const IssueDetails = () => {
 								</button>
 							</div>
 						</div>
-						<div className='bg-blue-200 w-2/5  ml-auto text-center text-2xl font-bold uppercase mx-auto'>
-							{" "}
-							chat screen
+					</div>
+					<div>
+						<p className=' mt-10 mb-2 text-4xl font-base text-center uppercase'>Chat with Admin</p>
+						<div className='flex justify-center'>
+							<div className=' bg-brand-2 h-px w-20 mb-5'></div>
 						</div>
+					</div>
+					<div className='-mt-80 h-full'>
+						<Chat></Chat>
 					</div>
 				</div>
 				<Footer></Footer>
