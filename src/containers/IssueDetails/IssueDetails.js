@@ -7,10 +7,10 @@ import Navbar from "../../components/Navbar/Navbar";
 const IssueDetails = () => {
 	const { _id } = useParams();
 
-	const openIssue = useSelector((state) => state.issue.openIssue);
+	const issues = useSelector((state) => state.issue.allIssue);
 
-	console.log(openIssue);
-	const singleIssue = openIssue.find((issue) => issue._id === _id);
+	console.log(issues);
+	const singleIssue = issues.find((issue) => issue._id === _id);
 	console.log(singleIssue);
 	return (
 		<div className='flex flex-col md:flex-row'>

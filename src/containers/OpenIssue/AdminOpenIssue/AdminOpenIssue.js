@@ -3,13 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import Footer from "../../../components/Footer/Footer";
 import OpenCard from "../../../components/IssueCard/OpenCard/OpenCard";
 import Navbar from "../../../components/Navbar/Navbar";
-import { adminIssue } from "../../../redux/slices/issueSlice";
+import { adminIssue, allIssues } from "../../../redux/slices/issueSlice";
 
 const AdminOpenIssue = () => {
 	const user = useSelector((state) => state.data.user);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(adminIssue({ email: user.email, status: "open" }));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+	
+	useEffect(() => {
+		dispatch(allIssues());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
