@@ -12,15 +12,11 @@ const Analytics = () => {
 
 	let data;
 
-	if (!openIssue.length || !activeIssue.length || !resolvedIssue.length) {
-		data = [{ name: "No Issue", value: 100 }];
-	} else {
-		data = [
-			{ name: "Open Issue", value: openIssue.length },
-			{ name: "Active Issue", value: activeIssue.length },
-			{ name: "Resolved Issues", value: resolvedIssue.length },
-		];
-	}
+	data = [
+		{ name: "Open Issue", value: openIssue.length },
+		{ name: "Active Issue", value: activeIssue.length },
+		{ name: "Resolved Issues", value: resolvedIssue.length },
+	];
 
 	const RADIAN = Math.PI / 180;
 	const renderCustomizedLabel = ({
