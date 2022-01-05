@@ -15,7 +15,7 @@ const PrivateRoute = ({ children, ...rest }) => {
 			</div>
 		);
 	}
-	return user?.displayName ? (
+	return user?.email ? (
 		children
 	) : (
 		<Navigate to='/login' replace state={{ path: location.pathname }} />
