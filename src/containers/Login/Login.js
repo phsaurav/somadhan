@@ -29,7 +29,6 @@ const Login = () => {
 					email: user.email,
 					name: user.displayName,
 					photoURL: user.photoURL,
-					role: "",
 				};
 				dispatch(saveUser({ user: newUser, method: "PUT" }));
 			})

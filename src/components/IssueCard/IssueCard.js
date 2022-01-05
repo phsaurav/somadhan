@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './IssueCard.css';
 
 const IssueCard = (props) => {
-  const { date, time, issue_name, description, _id } = props.issue;
+  const { date, time, title, description, _id } = props.issue;
 
   // const handleDetails = () => {
   //   document.getElementById('detailsContainer')
@@ -30,7 +30,7 @@ const IssueCard = (props) => {
             </div>
           </div>
           <div className="font-semibold text-gray-800 text-xl text-center lg:text-left px-2">
-            Issue: {issue_name}
+            Issue: {title}
           </div>
 
           <div className="text-gray-600 font-medium text-sm pt-1 text-center lg:text-left px-2 ">
