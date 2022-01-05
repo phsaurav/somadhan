@@ -24,7 +24,7 @@ const IssueDetails = () => {
 
       <div className="flex flex-col justify-between w-full">
         <div className=" h-full container mx-auto mt-20 ">
-          <div className="flex  justify-around mt-10">
+          <div className="xl:flex  block justify-around mt-10">
             <div className="  w-2/5 mx-auto text-gray-600 text-center  ">
               <h2 className="text-2xl font-bold uppercase">
                 {singleIssue?.date}
@@ -44,7 +44,7 @@ const IssueDetails = () => {
                 </button>
               </div>
             </div>
-            <div className="bg-blue-200 w-2/5  ml-auto text-center text-2xl font-bold uppercase">
+            <div className="bg-blue-200 w-2/5  ml-auto text-center text-2xl font-bold uppercase mx-auto">
               {' '}
               chat screen
             </div>
