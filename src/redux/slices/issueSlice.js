@@ -1,9 +1,32 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// export const fetchBooks = createAsyncThunk("book/fetchBooks", async () => {
-// 	const response = await fetch("./books.json").then((res) => res.json());
-// 	return response.data;
-// });
+export const adminIssue = createAsyncThunk("issue/adminIssue", async (data) => {
+	try {
+		const res = await fetch("https://somadhanapp.herokuapp.com/admin/byemail", {
+			method: "POST",
+			headers: {
+				"content-type": "application/json",
+			},
+			body: JSON.stringify({ email: data.email, status: data.status }),
+		});
+		const response = await res.json();
+		return { response, status: data.status };
+	} catch (err) {}
+});
+
+export const userIssue = createAsyncThunk("issue/userIssue", async (data) => {
+	try {
+		const res = await fetch("https://somadhanapp.herokuapp.com/user/byemail", {
+			method: "POST",
+			headers: {
+				"content-type": "application/json",
+			},
+			body: JSON.stringify({ email: data.email, status: data.status }),
+		});
+		const response = await res.json();
+		return { response, status: data.status };
+	} catch (err) {}
+});
 
 const initialState = {
 	openIssue: [],
@@ -34,11 +57,26 @@ export const issueSlice = createSlice({
 			state.resolvedIssue = state.resolvedIssue.filter((issue) => issue.id === payload);
 		},
 	},
-	// extraReducers: (builder) => {
-	// 	builder.addCase(fetchBooks.fulfilled, (state, action) => {
-	// 		state.discover = action.payload;
-	// 	});
-	// },
+	extraReducers: (builder) => {
+		builder.addCase(adminIssue.fulfilled, (state, action) => {
+			if (action.payload.status === "open") {
+				state.openIssue = action.payload.response;
+			} else if (action.payload.status === "active") {
+				state.activeIssue = action.payload.response;
+			} else {
+				state.resolvedIssue = action.payload.response;
+			}
+		});
+		builder.addCase(userIssue.fulfilled, (state, action) => {
+			if (action.payload.status === "open") {
+				state.openIssue = action.payload.response;
+			} else if (action.payload.status === "active") {
+				state.activeIssue = action.payload.response;
+			} else {
+				state.resolvedIssue = action.payload.response;
+			}
+		});
+	},
 });
 
 export const {
