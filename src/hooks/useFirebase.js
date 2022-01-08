@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import initializeAuthentication from "../services/Firebase/firebase.init";
+import { getFirestore } from "firebase/firestore";
 import {
 	getAuth,
 	signInWithPopup,
@@ -17,6 +18,7 @@ import { setAdmin, setIsLoading, setToken, setUser } from "../redux/slices/fireb
 initializeAuthentication();
 
 const useFirebase = () => {
+	const db = getFirestore();
 	const auth = getAuth();
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.data.user);
