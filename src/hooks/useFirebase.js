@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import initializeAuthentication from "../services/Firebase/firebase.init";
-import { getFirestore } from "firebase/firestore";
 import {
 	getAuth,
 	signInWithPopup,
@@ -14,11 +13,14 @@ import {
 } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { setAdmin, setIsLoading, setToken, setUser } from "../redux/slices/firebaseSlice";
+import firebase from "firebase/compat/app";
+import firebaseConfig from "../services/Firebase/firebase.config";
 
 initializeAuthentication();
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const useFirebase = () => {
-	const db = getFirestore();
+	const db = firebaseApp.firestore();
 	const auth = getAuth();
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.data.user);
@@ -86,6 +88,7 @@ const useFirebase = () => {
 	return {
 		auth,
 		db,
+		firebase,
 		processLogin,
 		logOut,
 		signInUsingGoogle,
