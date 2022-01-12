@@ -38,7 +38,7 @@ function ChatRoom({ reciverEmail }) {
 			.orderBy("createdAt")
 			.limit(25)
 			.onSnapshot((snapshot) => setMessages(snapshot.docs.map((doc) => doc.data())));
-	}, []);
+	}, [db]);
 
 	return (
 		<div className='container'>
