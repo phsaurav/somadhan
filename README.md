@@ -1,8 +1,8 @@
 # SOMADHAN
 
-Create an issue regarding any matter and get solved instantly.
+An issue tracking service system where admin can main create account and maintain issues and talk to user through chat system. User can create issues and see the issue development and communicate directly through chat with admins.
 
-Live site to the website [Somadhan](https://somadhan.netlify.app/login)
+Live site to the website [Somadhan](https://somadhan.netlify.app)
 
 - user can Create Issues on the go
 - user Check on your opened or resolved issues
@@ -18,5 +18,3 @@ Live site to the website [Somadhan](https://somadhan.netlify.app/login)
 - used mongoDb to save Issues, users, chat information in database
 - It has admin login system . An admin can make another user admin
 - Admin or user can remove an issue if needed
-
-  _Live Happy Drive Safely!_
