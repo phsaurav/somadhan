@@ -1,6 +1,6 @@
 # SOMADHAN
 
-An issue tracking service system where admin can main create account and maintain issues and talk to user through chat system. User can create issues and see the issue development and communicate directly through chat with admins.
+An issue tracking service system where admin can create account and maintain issues and talk to users through chat system. User can create issues and see the issue development and communicate directly through chat with admins.
 
 ### Live site to the website [Somadhan](https://somadhan.netlify.app)
 
