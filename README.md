@@ -2,7 +2,7 @@
 
 An issue tracking service system where admin can create account and maintain issues and talk to users through chat system. User can create issues and see the issue development and communicate directly through chat with admins.
 
-### Live site to the website [Somadhan](https://somadhan.netlify.app)
+### Live site to the website: [Somadhan Live Site](https://somadhan.netlify.app)
 
 ## Authentication System
 * User and Admin can create individual user and admin account
