@@ -86,7 +86,20 @@ function App() {
 							)
 						}
 					/>
-					<Route path='issue/:_id' element={<IssueDetails />} />
+					<Route
+						path='issue/:_id'
+						element={
+							admin ? (
+								<AdminRoute>
+									<IssueDetails />
+								</AdminRoute>
+							) : (
+								<PrivateRoute>
+									<IssueDetails />
+								</PrivateRoute>
+							)
+						}
+					/>
 				</Routes>
 			</Router>
 		</div>
