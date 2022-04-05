@@ -62,12 +62,12 @@ const Login = () => {
 			<Link to='/home'>
 				<button
 					type='button'
-					className='bg-white rounded-md p-2 inline-flex items-center justify-center  fixed top-0 right-0 hover:text-brand-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset  text-2xl focus:ring-indigo-500 text-brand-1'
+					className='bg-white rounded-md p-2 inline-flex items-center justify-center fixed top-0 right-0 hover:text-brand-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset text-2xl focus:ring-indigo-500 text-brand-1'
 				>
 					<MdClose></MdClose>
 				</button>
 			</Link>
-			<div className='flex flex-col justify-center items-center h-screen'>
+			<div className='flex flex-col justify-start items-center h-screen mt-20'>
 				<img src={logo} alt='Logo' style={{ height: "150px" }} />
 
 				<form className='mt-4 ' onSubmit={handleSubmit(onSubmit)}>
@@ -99,7 +99,7 @@ const Login = () => {
 				</form>
 				<p className='text-center py-3 font-semibold text-brand-12'>{error}</p>
 				<hr className='border-0 w-80 bg-bluegray-300 text-gray-500 h-px'></hr>
-				<div className='flex justify-center mb-80'>
+				<div className='flex justify-centerß'>
 					<button
 						onClick={handleGoogleSignIn}
 						className='rounded-full bg-brand-3 text-white text-2xl p-2 mt-5 hover:bg-white  border-white hover:border-brand-3 border-2 hover:text-brand-3'

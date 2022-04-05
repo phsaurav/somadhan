@@ -57,7 +57,7 @@ const Register = () => {
 
 	return (
 		<div className='w-full h-full fixed block top-0 left-0 bg-white  z-30 '>
-			<div className='flex flex-col justify-center items-center h-screen'>
+			<div className='flex flex-col justify-start items-center h-screen mt-20'>
 				<img src={logo} alt='Logo' style={{ height: "150px" }} />
 
 				<form className='mt-4 ' onSubmit={handleSubmit(onSubmit)}>
@@ -110,11 +110,13 @@ const Register = () => {
 					</button>
 					<br />
 					<Link to='/login'>
-						<p className='text-center py-3 font-semibold text-brand-2'>Already have an account</p>
+						<p className='text-center py-3 font-semibold text-brand-2 hover:text-brand-3'>
+							Already have an account
+						</p>
 					</Link>
 				</form>
 				<hr className='border-0 w-80 bg-bluegray-300 text-gray-500 h-px'></hr>
-				<p className='text-center py-3 font-semibold text-brand-12 mb-96'>{error}</p>
+				<p className='text-center py-3 font-semibold text-brand-12'>{error}</p>
 			</div>
 		</div>
 	);
