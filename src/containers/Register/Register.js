@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUser, setError, setIsLoading, setUser } from "../../redux/slices/firebaseSlice";
 import useFirebase from "../../hooks/useFirebase";
+import { MdClose } from "react-icons/md";
 
 const Register = () => {
 	const { handleSubmit, register } = useForm();
@@ -56,8 +57,16 @@ const Register = () => {
 	};
 
 	return (
-		<div className='w-full h-full fixed block top-0 left-0 bg-white  z-30 '>
-			<div className='flex flex-col justify-start items-center h-screen mt-20'>
+		<div>
+			<Link to='/home'>
+				<button
+					type='button'
+					className='bg-white rounded-md p-2 inline-flex items-center justify-center fixed top-0 right-0 hover:text-brand-1 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset text-2xl focus:ring-indigo-500 text-brand-1'
+				>
+					<MdClose></MdClose>
+				</button>
+			</Link>
+			<div className='flex flex-col justify-start items-center pt-20 mb-10'>
 				<img src={logo} alt='Logo' style={{ height: "150px" }} />
 
 				<form className='mt-4 ' onSubmit={handleSubmit(onSubmit)}>

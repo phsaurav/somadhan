@@ -67,7 +67,7 @@ const Login = () => {
 					<MdClose></MdClose>
 				</button>
 			</Link>
-			<div className='flex flex-col justify-start items-center h-screen mt-20'>
+			<div className='flex flex-col justify-start items-center pt-20 pb-10'>
 				<img src={logo} alt='Logo' style={{ height: "150px" }} />
 
 				<form className='mt-4 ' onSubmit={handleSubmit(onSubmit)}>

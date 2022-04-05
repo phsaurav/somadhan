@@ -37,7 +37,7 @@ const Navbar = () => {
 					<div className='container mx-auto'>
 						<div className='text-black flex flex-col items-center'>
 							<NavLink to='/home'>
-								<img className='h-16 md:mt-32 md:my-10 my-5' src={logo} alt='logo' />
+								<img className='h-8 md:h-16 md:mt-32 md:my-10 my-5' src={logo} alt='logo' />
 							</NavLink>
 
 							<div className='flex items-end justify-center'>
